@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::resource('/admin/messages', 'MessageController');
+
+Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
+Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
+Route::resource('/admin/users', 'UserController');
+
+Route::resource('/admin/quizzes', 'QuestionController');
