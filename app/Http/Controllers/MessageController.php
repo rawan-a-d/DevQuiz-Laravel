@@ -89,3 +89,4 @@ class MessageController extends Controller
         return redirect('admin/messages');
     }
 }
+?>

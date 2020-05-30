@@ -16,8 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});
+Route::get('/quizpage', function () {
+    return view('quizpage');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::post('/contact/submit', 'MessageController@create');
 
 Route::resource('/admin/messages', 'MessageController');
 
