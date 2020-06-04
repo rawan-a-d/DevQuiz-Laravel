@@ -2,9 +2,6 @@
 @section('sessions')
     @parent
     <?php
-/* Include classes */
-include_once("../../includes/autoload.inc.php");
-
 
 $ok=1;$havequestions=1;
 if (isset($_GET['subject'])) $subject=$_GET['subject'];
@@ -38,10 +35,7 @@ if (isset($_GET['c']))
 @section('content')
     <header  id="website_purpose">
         <h1 class="testname">
-        <?php
-          $controller = new quizzController();
-          echo $controller->getSubjectBYID($subject);
-        ?>
+          {{$question->subject}}
         </h1>
     </header>
 

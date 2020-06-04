@@ -1,7 +1,7 @@
 
 <!-- Common css links(navbar, footer) -->
-<link rel="stylesheet" type="text/css" href="css/navbar.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css">
+<link rel="stylesheet" type="text/css" href="/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="/css/footer.css">
 <link rel="icon" type="image/png" href="img/logo.png" />
 </head>
 <body>
@@ -9,7 +9,7 @@
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="profile">Profile</a></li>
+        <li><a href="/profile/{id}">Profile</a></li>
         <!-- If user is admin -->
         <?php
         if (isset($_SESSION['admin'])){
@@ -20,8 +20,8 @@
             }
         }
         ?>
-        <li><a href="aboutus">About us</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li><a href="/aboutus">About us</a></li>
+        <li><a href="/contact">Contact</a></li>
         <li id="logout"><a href="logout">Log out</a></li>
     </ul>
 </nav>

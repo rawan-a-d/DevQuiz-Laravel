@@ -28,7 +28,8 @@
 @section('content')
     <!-- Main -->
     <main id="main">
-        <form method="POST" action="contact/submit" id="contact_form">
+        <form method="POST" action="" id="contact_form">
+            @csrf
             <label for="subject">Subject</label>
             <select id="subject" name="subject">
                 <option value="subject">Select a subject</option>

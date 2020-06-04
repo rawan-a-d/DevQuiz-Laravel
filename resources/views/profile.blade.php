@@ -3,14 +3,8 @@
 @section('sessions')
     @parent
     <?php
-{{--/* Include classes */--}}
-{{--include_once("../../includes/autoload.inc.php");--}}
 
-{{--$controller = new UserController();--}}
-{{--$userdata=$controller->getUser($_SESSION['userId']);--}}
-{{--$birthday=$userdata['birthday'];--}}
-{{--$university=$userdata['university'];--}}
-{{--$program=$userdata['program'];--}}
+//$userdata=user($_SESSION['userId']);
     ?>
 @endsection
 
@@ -24,7 +18,7 @@
         <div class="left">
             <img src="img/IDPic.jpeg"
                  alt="user" width="100">
-            <h4>{{$username}}</h4>
+            <h4>{{$user->name}}</h4>
 
         </div>
         <div class="right">
@@ -32,11 +26,11 @@
                 <div class="info_data">
                     <div class="data">
                         <h4>Email</h4>
-                        <p>{{$email}}</p>
+                        <p>{{$user->email}}</p>
                     </div>
                     <div class="data">
                         <h4>Birthday</h4>
-                        <p>{{$birthday}}</p>
+                        <p>{{$user->birthday}}</p>
                     </div>
                 </div>
             </div>
@@ -45,11 +39,11 @@
                 <div class="bottom_data">
                     <div class="data">
                         <h4>University</h4>
-                        <p>{{$university}}</p>
+                        <p>{{$user->university}}</p>
                     </div>
                     <div class="data">
                         <h4>Progamming languages</h4>
-                        <p>{{$program}}.</p>
+                        <p>{{$user->program}}.</p>
                     </div>
                 </div>
             </div>

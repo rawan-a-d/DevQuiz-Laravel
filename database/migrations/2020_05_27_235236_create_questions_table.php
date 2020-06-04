@@ -17,10 +17,10 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->integer('subject_id');
             $table->text('question');
-            $table->string('asn_a');
-            $table->string('asn_b');
-            $table->string('asn_c');
-            $table->string('asn_d');
+            $table->string('ans_a');
+            $table->string('ans_b');
+            $table->string('ans_c');
+            $table->string('ans_d');
             $table->string('answer');
             $table->string('level');
             $table->timestamps();

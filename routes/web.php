@@ -16,19 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/profile', function () {
-    return view('profile');
-});
+Route::get('/profile/{id}', 'UserController@show');
+
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
-Route::get('/quizpage', function () {
-    return view('quizpage');
-});
-Route::get('/contact', function () {
+Route::get('contact', function () {
     return view('contact');
 });
-Route::post('/contact/submit', 'MessageController@create');
+Route::get('/quizpage{id}', 'QuestionController@show');
+
+Route::post('/contact', 'MessageController@store');
 
 Route::resource('/admin/messages', 'MessageController');
 

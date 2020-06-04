@@ -15,10 +15,11 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
+            $table->enum('subject', ['Quiz', 'Score', 'Other']);
             $table->text('message');
             $table->integer('user_id')->unsigned();
-            $table->date('date');
+            $table->timestamps();
+
         });
     }
 

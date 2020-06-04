@@ -18,7 +18,7 @@
 @section('content')
     <!-- Header -->
     <header id="website_purpose">
-        <h2>Hello {{@username}}</h2>
+        <h2>Hello {{$name?? ''}}</h2>
         <h2>Welcome to DevQuiz</h2>
         <h4>The most comprehensive resource with a lot of quality programming quiz, questions and tutorials that help you to improve you programming knowledge.</h4>
     </header>
@@ -118,6 +118,6 @@
 				</pre>
         </div>
     </main>
-    <script type="text/javascript" src="js/anime.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="/js/anime.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
 @endsection
