@@ -97,10 +97,12 @@ class UserController extends Controller
         $inputs = request()->validate([
             'name'=>'required|string|min:4|max:255',
             'email'=>'required|string|email',
-//            'university'=>'string',
-//            'birthday'=>'date',
-//            'program'=>'string',
         ]);
+
+        $inputs['role'] = $request->role;
+        $inputs['university'] = $request->university;
+        $inputs['program'] = $request->program;
+        $inputs['birthday'] = $request->birthday;
 
         $user = User::findOrFail($id);
 
