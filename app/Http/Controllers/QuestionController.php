@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -51,12 +52,60 @@ class QuestionController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function first($subject, $level)
+    {
+        $question = Question::with('Subject')
+            ->where([
+                ['subject_id', '=', $subject],
+                ['level', '=', $level]])
+            ->orderBy('id')
+            ->limit(1)
+            ->get()->first();
+
+        return view('quizpage', ['question' => $question, 'hasNext' => $this->hasNext($subject, $level, $question->id)]);
+
+    }
+    public function next($subject, $level, $id, $correct)
+    {
+        $question = $this->getNextQuestion($subject, $level, $id);
+        $questions = Question::with('Subject')
+            ->where([
+                ['subject_id', '=', $subject],
+                ['level', '=', $level]])
+            ->get();
+        $total = count($questions);
+
+        return view('quizpage', [
+            'question' => $question,
+            'hasNext' => $this->hasNext($subject, $level, $id),
+            'total' => $total,
+            'correct' => $correct
+        ]);
+    }
+
+    public function hasNext($subject, $level, $id)
+    {
+        if($this->getNextQuestion($subject, $level, $id))
+        {
+            return true;
+        }
+        return false;
+
+    }
+
+    private function getNextQuestion($subject, $level, $id)
+    {
+        return Question::with('Subject')
+            ->where([
+                ['subject_id', '=', $subject],
+                ['level', '=', $level],
+                ['id', '>', $id]
+            ])
+            ->orderBy('id')
+            ->limit(1)
+            ->get()->first();
+    }
+
     public function show($id)
     {
         $question = Question::findOrFail($id);

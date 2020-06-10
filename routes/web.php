@@ -21,10 +21,13 @@ Route::get('/profile/{id}', 'UserController@show');
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
-Route::get('contact', function () {
+Route::get('/contact', function () {
     return view('contact');
 });
-Route::get('/quizpage{id}', 'QuestionController@show');
+
+Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
+
+Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
 
 Route::post('/contact', 'MessageController@store');
 

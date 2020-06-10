@@ -5,7 +5,7 @@ var playing = false;
 card.addEventListener('click',function() {
 	if(playing)
 		return;
-	
+
 	playing = true;
 	anime({
 		targets: card,
@@ -26,7 +26,7 @@ var playing = false;
 cardCSS.addEventListener('click',function() {
 	if(playing)
 		return;
-	
+
 	playing = true;
 	anime({
 		targets: cardCSS,
@@ -47,7 +47,7 @@ var playing = false;
 cardJS.addEventListener('click',function() {
 	if(playing)
 		return;
-	
+
 	playing = true;
 	anime({
 		targets: cardJS,
@@ -65,18 +65,5 @@ cardJS.addEventListener('click',function() {
 
 											/* Redirect to quizzes */
 function redirect( a, b){
-	// get current URL path and assign 'active' class
-	var pathname = window.location.href;
-
-	// Split url
-	var splitPath = pathname.split("/");
-
-	// Remove last item
-	splitPath.splice(splitPath.length - 1, 1);
-
-	// Join the url again
-	var currentPathname = splitPath.join("/");
-
-	// Redirect
-	window.location.href = currentPathname + "/app/view/quizpage.php?subject=" + a + "&level=" + b;
+    window.location.href = "/quizpage/" + a + "/" + b;
 }

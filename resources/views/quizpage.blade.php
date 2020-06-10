@@ -1,41 +1,35 @@
 @extends('layouts.master')
+<link rel="stylesheet" href="{{ asset('/css/quizpage.css') }}">
 @section('sessions')
-    @parent
-    <?php
-
-$ok=1;$havequestions=1;
-if (isset($_GET['subject'])) $subject=$_GET['subject'];
-else $ok=0;
-if (isset($_GET['level'])) $level=$_GET['level'];
-else $ok=0;
-if ($ok){
-$controller = new quizzController();
-$questions=$controller->getQuestionsBySubjectLevel($subject, $level);
-$nrq=$controller->getCountBySubjectLevel($subject, $level);
-if (!$nrq) $havequestions=0;
-
-if (!isset($_SESSION['currentq']))
-{
-    $_SESSION['currentq']=0;
-    $_SESSION['correctans']=0;
-}
-else $_SESSION['currentq']=$_SESSION['currentq']+1;
-//echo $_SESSION['currentq'];
-if (isset($_GET['c']))
-{
-    if ($_GET['c']) $_SESSION['correctans']++;
-}
-    ?>
+@parent
 @endsection
 
-
 @section('title', 'Dev Quiz')
-@section('css', 'quizpage')
-
 @section('content')
+
+<?php
+if (isset($question))
+{
+
+?>
+<script>
+    function verify(){
+        var totalCorrect = {{$correct ?? 0}};
+        var x = document.getElementsByName ("question-1-answers");
+        for (var i=0;i<x.length;i++) {
+            if (x[i].checked) {
+                if (x[i].value == '{{$question->answer}}') {
+                    totalCorrect++;
+                }
+            }
+        }
+        // Redirect
+        window.location.href = "/quizpage/{{$question->subject->id}}/{{$question->level}}/{{$question->id}}/" + totalCorrect;
+    }
+</script>
     <header  id="website_purpose">
         <h1 class="testname">
-          {{$question->subject}}
+     {{$question->subject->name}}
         </h1>
     </header>
 
@@ -47,26 +41,26 @@ if (isset($_GET['c']))
 
             <li>
 
-                <h3><?php echo $_SESSION['currentq']+1;echo ".  ";echo htmlspecialchars($q['question']);echo " ?";?></h3>
+                <h3>{{$question->question}}</h3>
 
                 <h2>
                     <input type="radio" name="question-1-answers" id="question-1-answers-A" value="a" />
-                    <label for="question-1-answers-A"><?php echo htmlspecialchars($q['ans_a']);?> </label>
+                    <label for="question-1-answers-A">{{$question->ans_a}}</label>
                 </h2>
 
                 <h4>
                     <input type="radio" name="question-1-answers" id="question-1-answers-B" value="b" />
-                    <label for="question-1-answers-B"><?php echo htmlspecialchars($q['ans_b']);?></label>
+                    <label for="question-1-answers-B">{{$question->ans_b}}</label>
                 </h4>
 
                 <h5>
                     <input type="radio" name="question-1-answers" id="question-1-answers-C" value="c" />
-                    <label for="question-1-answers-C"><?php echo htmlspecialchars( $q['ans_c']);?></label>
+                    <label for="question-1-answers-C">{{$question->ans_c}}</label>
                 </h5>
 
                 <h6>
                     <input type="radio" name="question-1-answers" id="question-1-answers-D" value="d" />
-                    <label for="question-1-answers-D"><?php echo htmlspecialchars( $q['ans_d']);?></label>
+                    <label for="question-1-answers-D">{{$question->ans_d}}</label>
                 </h6>
 
             </li>
@@ -78,25 +72,17 @@ if (isset($_GET['c']))
     <?php
         }
         else {
-          if ($havequestions)
-          {
+            if(!$hasNext){
             ?>
     <!--html code here-->
         <div id="content">
             <div class="page-wrap">
                 <h3>You answered correctly:</h3>
-                <h3><?php echo $_SESSION['correctans'];?>  / {{$nrq}}?></h3>
+                <h3>{{$correct}} / {{$total}}</h3>
             </div>
         </div>
     <?php
-    $_SESSION['currentq']=-1;
-    $_SESSION['correctans']=0;
-    //unset($nrq);
-    //unset($ok);
-    //unset($q);
-    //unset($questions);
-    //unset($_SESSION['currentq']);
-    //unset($_SESSION['correctans']);
+
     }
     else
     {
@@ -110,7 +96,8 @@ if (isset($_GET['c']))
         </div>
         <?php
         }
-        }?>
+    }
+        ?>
 
     </div>
 @endsection
