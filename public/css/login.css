@@ -114,9 +114,6 @@ button#signup {
 
 input.credentials.is-invalid {
     border: 2px solid #e74c3c;
-	color: white;
-	background-color: #d68916;
-	margin-left: 1%;
 }
 
 

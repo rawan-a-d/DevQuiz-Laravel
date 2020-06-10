@@ -9,19 +9,18 @@
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/profile/{id}">Profile</a></li>
+        <li><a href="/profile/{{Auth::user()->id}}">Profile</a></li>
         <!-- If user is admin -->
-        <?php
-        if (isset($_SESSION['admin'])){
-            if($_SESSION['admin'] == 1)
-            { ?>
-                <li><a href="views/admin/users.php">Admin</a></li>
-                <?php
-            }
-        }
-        ?>
+        @if(Auth::user()->isAdmin())
+            <li><a href="{{route('users.index')}}">Admin</a></li>
+        @endif
         <li><a href="/aboutus">About us</a></li>
         <li><a href="/contact">Contact</a></li>
-        <li id="logout"><a href="logout">Log out</a></li>
+        <li id="li_logout">
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button id="logout">Logout</button>
+            </form>
+        </li>
     </ul>
 </nav>

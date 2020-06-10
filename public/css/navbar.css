@@ -24,7 +24,7 @@ li a {
 	text-decoration: none;
 }
 
-li a:hover:not(.active) {
+li a:hover:not(.active), form > #logout:hover {
 	background-color: #005769;
 }
 
@@ -35,7 +35,24 @@ li a:hover:not(.active) {
 }
 
 
+/* Logout form */
+form {
+    margin: 0;
+}
+
 /* Logout button */
-li#logout {
-	float: right;
+form > #logout{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    width: auto;
+    background-color: #138ba4;
+    box-shadow: none;
+}
+
+
+li#li_logout {
+    float: right;
 }

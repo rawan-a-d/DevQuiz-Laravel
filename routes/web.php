@@ -13,29 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/profile/{id}', 'UserController@show');
-
-Route::get('/aboutus', function () {
-    return view('aboutus');
-});
-Route::get('/contact', function () {
-    return view('contact');
-});
-
-Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
-
-Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
-
-Route::post('/contact', 'MessageController@store');
 
 Auth::routes();
 
 /* Authenticated users */
 Route::middleware('auth')->group(function() {
-    Route::get('/home', 'HomeController@index')->name('home');
+   // Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/', function () {
+        return view('index');
+    });
+    Route::get('/profile/{id}', 'UserController@show');
+
+    Route::get('/aboutus', function () {
+        return view('aboutus');
+    });
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+
+    Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
+
+    Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
+
+    Route::post('/contact', 'MessageController@store');
+
 });
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
