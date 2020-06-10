@@ -14,9 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/profile/{id}', 'UserController@show');
+
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});
+Route::get('/contact', function () {
+    return view('contact');
 });
 
+Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
+
+Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
+
+Route::post('/contact', 'MessageController@store');
 
 Auth::routes();
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Message;
@@ -26,7 +25,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('contact');
     }
 
     /**
@@ -37,7 +36,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = new Message($request->all());
+
+
+        $message->save();
+
+        return redirect('contact');
     }
 
     /**
@@ -91,3 +95,4 @@ class MessageController extends Controller
         return redirect('admin/messages');
     }
 }
+?>
