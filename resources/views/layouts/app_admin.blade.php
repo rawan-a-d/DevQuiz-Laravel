@@ -5,33 +5,35 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-{{--        <title>Admin</title>--}}
-        <title>App Name - @yield('title')</title>
-
+        <title>Admin - @yield('title')</title>
 
         <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/navbar.css') }}" />
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+        @yield('css')
     </head>
     <body>
         <div class="container">
             <!-- Top Navbar -->
             <nav>
                 <ul id="topnav" class="navbar">
-                    <li class="topnav_item"><a href="users.php">Dev Quiz Admin</a></li>
+                    <li class="topnav_item"><a href="{{route('users.index')}}">Dev Quiz Admin</a></li>
                     <!-- Display user name -->
                     <li class="dropdown topnav_item">
-        {{--                <button class="dropbtn"><?php echo $_SESSION['username']; ?>--}}
-        {{--                    <i class="fa fa-caret-down"></i>--}}
-        {{--                </button>--}}
+                        <button class="dropbtn">{{Auth::user()->name}}
+                            <i class="fa fa-caret-down"></i>
+                        </button>
                         <!-- Link to profile and logout -->
                         <div class="dropdown-content">
-                            <a href="../profile.php">Profile</a>
-                            <a href="../logout.php">Log out</a>
+                            <a href="">Profile</a>
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <button id="logout">Logout</button>
+                            </form>
                         </div>
                     </li>
                     <!-- Link to home page -->
-                    <li class="topnav_item" id="home"><a href="index.php">HOME SITE</a></li>
+                    <li class="topnav_item" id="home"><a href="{{asset('index')}}">HOME SITE</a></li>
                 </ul>
             </nav>
             <!-- Side navbar -->
@@ -40,8 +42,7 @@
                     <div class="overflow-container">
                         <ul class="menu-dropdown">
                             <!-- Quizzes -->
-{{--                            <li><a href="{{route('quizzes.index')}}">Quizzes</a><span class="icon"><i class="fa fa-question"></i></span></li>--}}
-                            <li class="menu-hasdropdown">
+                            <li class="menu-hasdropdown {{ active('quizzes.index') }}">
                                 <a href="{{route('quizzes.index')}}">Quizzes</a><span class="icon"><i class="fa fa-question"></i></span>
 
                                 <label title="toggle menu" for="quizzes">
@@ -55,7 +56,7 @@
                                 </ul>
                             </li>
                             <!-- Users -->
-                            <li class="menu-hasdropdown">
+                            <li class="menu-hasdropdown  {{ active('users.index') }}">
                                 <a href="{{route('users.index')}}">Users</a><span class="icon"><i class="fa fa-users"></i></span>
 
                                 <label title="toggle menu" for="users">
@@ -69,7 +70,9 @@
                                 </ul>
                             </li>
                             <!-- Messages -->
-                            <li><a href="{{route('messages.index')}}">Messages</a><span class="icon"><i class="fa fa-envelope"></i></span></li>
+                            <li class="{{ active('messages.index') }}">
+                                <a href="{{route('messages.index')}}">Messages</a><span class="icon"><i class="fa fa-envelope"></i></span>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -87,7 +90,6 @@
 
         <!-- JS -->
         <script type="text/javascript" src="admin/js/navbar.js"></script>
-        @yield('js')
 
     </body>
 </html>

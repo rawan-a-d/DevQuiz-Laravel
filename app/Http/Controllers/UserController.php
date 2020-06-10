@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
 
          return view('admin.users.users', compact('users'));
     }
@@ -37,10 +37,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->all());
+        //VALIDATE DATA
+        $inputs = request()->validate([
+            'name'=>'required|string|min:4|max:255',
+            'email'=>'required|string|email',
+            'password'=>'required|string|min:8',
+        ]);
+
+        $inputs['role'] = $request->role;
+        $inputs['university'] = $request->university;
+        $inputs['program'] = $request->program;
+        $inputs['birthday'] = $request->birthday;
+
+        $user = new User($inputs);
 
         //return $user;
         $user->save();
+
+        session()->flash('user-created-message', $user->name.' was added');
 
         return redirect('admin/users');
     }
@@ -79,12 +93,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //VALIDATE DATA
+        $inputs = request()->validate([
+            'name'=>'required|string|min:4|max:255',
+            'email'=>'required|string|email',
+//            'university'=>'string',
+//            'birthday'=>'date',
+//            'program'=>'string',
+        ]);
+
         $user = User::findOrFail($id);
 
-        $user->update($request->all());
+        $user->update($inputs);
 
-        return back();
+        session()->flash('user-updated-message', $user->name.' was updated');
+
+        return redirect('admin/users');
     }
 
     /**
@@ -99,6 +123,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->delete();
+
+        session()->flash('message', $user->name.' was deleted');
 
         return redirect('admin/users');
     }
@@ -119,6 +145,8 @@ class UserController extends Controller
         $user->role = 'admin';
         $user->save();
 
+        session()->flash('user-role-admin-message', $user->name.' was turned into an Admin');
+
         return back();
 
     }
@@ -137,6 +165,8 @@ class UserController extends Controller
         $user->role = 'subscriber';
 
         $user->save();
+
+        session()->flash('user-role-sub-message', $user->name.' was turned into a Subscriber');
 
         return back();
 

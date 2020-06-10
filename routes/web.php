@@ -18,11 +18,35 @@ Route::get('/', function () {
 });
 
 
+Auth::routes();
 
-Route::resource('/admin/messages', 'MessageController');
+/* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
+Route::middleware('auth')->group(function() {
+//    Route::resource('/admin/messages', 'MessageController')->middleware('auth');
+//
+//    Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
+//    Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
+      //Route::resource('/admin/users', 'UserController');
 
-Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
-Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
-Route::resource('/admin/users', 'UserController');
+    //Route::resource('/admin/quizzes', 'QuestionController');
 
-Route::resource('/admin/quizzes', 'QuestionController');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+
+//Route::middleware(['role:admin','auth'])->group(function(){
+//
+//    Route::get('admin/users', 'UserController@index')->name('users.index');
+//});
+
+
+Route::group(['middleware'=>'admin'], function(){
+    Route::resource('/admin/users', 'UserController');
+    Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
+    Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
+
+    Route::resource('/admin/messages', 'MessageController')->middleware('auth');
+
+    Route::resource('/admin/quizzes', 'QuestionController');
+});

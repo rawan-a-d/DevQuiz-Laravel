@@ -1,48 +1,20 @@
-.page-wrap {
-    margin: 5% 25%;
-    font: 14px Arial, Serif;
-}
-.page-wrap h1 {
-    margin: 25px 0;
-    font: 24px Arial, Serif;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #e69214;
-}
-.page-wrap #question {
-    width: 77%;
-    font: 14px Arial, Serif;
-}
-.page-wrap #answer1 {
-    width: 65%;
-    font: 14px Arial, Serif;
-}
-.page-wrap #answer2 {
-    width: 65%;
-    font: 14px Arial, Serif;
-}
-.page-wrap #answer3 {
-    width: 65%;
-    font: 14px Arial, Serif;
-}
-.page-wrap #answer4 {
-    width: 65%;
-    font: 14px Arial, Serif;
-}
-.page-wrap #qtype{
-    background-color: #139cb8;
-}
-.save{
-    width: 25%;
-    height: 50px;
-    padding: 1px;
-    -moz-border-radius: 35px;
-    border-radius: 35px;
-    background-color: #e69214;
-    color: #138ba4;
-    position: sticky;
-    bottom: 1;
-    text-align: center;
-    margin-left: 40%;
-    margin-top: 20%;
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media
+only screen and (max-width: 1000px) {
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before { content: "Id"; }
+    td:nth-of-type(2):before { content: "Subject"; }
+    td:nth-of-type(3):before { content: "Question"; }
+    td:nth-of-type(4):before { content: "Answer 1"; }
+    td:nth-of-type(4):before { content: "Answer 2"; }
+    td:nth-of-type(4):before { content: "Answer 3"; }
+    td:nth-of-type(4):before { content: "Answer 4"; }
+    td:nth-of-type(5):before { content: "Correct answer"; }
+    td:nth-of-type(6):before { content: "Level"; }
 }

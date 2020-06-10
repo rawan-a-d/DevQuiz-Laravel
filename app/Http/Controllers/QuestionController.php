@@ -15,9 +15,11 @@ class QuestionController extends Controller
     public function index()
     {
         // Get questions and sort them by subject then by level
-        $questions = Question::all()->sortBy(function($item){
-            return $item->subject_id.'#'.$item->level;
-        });
+        $questions = Question::paginate(10);
+//
+//        $questions = Question::paginate(10)->sortBy(function($item){
+//            return $item->subject_id.'#'.$item->level;
+//        });
 
         return view("admin.quizzes.quizzes", compact('questions'));
     }
@@ -40,13 +42,24 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $question = new Question($request->all());
+        //VALIDATE DATA
+        $inputs = request()->validate([
+            'question'=>'required|min:8|max:255',
+            'level'=>'required',
+            'ans_a'=>'required',
+            'ans_b'=>'required',
+            'ans_c'=>'required',
+            'ans_d'=>'required',
+        ]);
 
-        //return $user;
+        $inputs['subject_id'] = $request->subject_id;
+        $inputs['answer'] = $request->subject_id;
+
+        session()->flash('question-created-message', 'Question with title "'.$inputs['question'].'" was added');
+
+        $question = new Question($inputs);
+
         $question->save();
-
-        //return $question;
 
         return redirect('admin/quizzes');
 
@@ -86,11 +99,23 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //VALIDATE DATA
+        $inputs = request()->validate([
+            'question'=>'required|min:8|max:255',
+            'level'=>'required',
+            'ans_a'=>'required',
+            'ans_b'=>'required',
+            'ans_c'=>'required',
+            'ans_d'=>'required',
+        ]);
+
         $question = Question::findOrFail($id);
 
-        $question->update($request->all());
+        $question->update($inputs);
 
-        return back();
+        session()->flash('question-updated-message', 'Question with title "'.$question->question.'" was updated');
+
+        return redirect('admin/quizzes');
     }
 
     /**
@@ -105,6 +130,8 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
 
         $question->delete();
+
+        session()->flash('message', 'Question was deleted');
 
         return back();
     }
