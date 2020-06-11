@@ -20,15 +20,12 @@ Auth::routes();
 
 /* Authenticated users */
 Route::middleware('auth')->group(function() {
-
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/profile', 'UserController@show');
     Route::post('/profile', 'UserController@updatePicture');
 
-    Route::get('/profile/{id}', 'UserController@show');
+    Route::get('/profile/{id}', 'UserController@show')->name('profile.show');
 
     Route::get('/aboutus', function () {
         return view('aboutus');
@@ -42,7 +39,14 @@ Route::middleware('auth')->group(function() {
     Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
 
     Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
+
+    Route::put('/profile/{id}', 'UserController@updateProfile')->name('profile.update');
+
+    Route::get('/password/reset', 'UserController@resetPassword')->name('password.request');
+
+    Route::put('/password/reset', 'UserController@updatePassword')->name('password.update');
 });
+
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
 Route::group(['middleware'=>'admin'], function(){
