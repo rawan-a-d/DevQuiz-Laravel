@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/profile/{id}', 'UserController@show');
-
+Route::post('/profile/{id}', 'UserController@updatePicture');
 Route::get('/aboutus', function () {
     return view('aboutus');
 });

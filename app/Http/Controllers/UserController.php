@@ -88,6 +88,19 @@ class UserController extends Controller
         return back();
     }
 
+    public function updatePicture(Request $request, $id){
+        $user = User::findOrFail($id);
+        if($request->hasFile('avatar')){
+            $filename = $request->avatar->getClientOriginalName();
+            $request->avatar->storeAs('avatars', $filename);
+
+            $user->avatar = $filename;
+        }
+
+        $user->save();
+        return 'yes';
+    }
+
     /**
      * Remove the specified resource from storage.
      *
