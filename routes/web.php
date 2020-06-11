@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Auth::routes();
+
 
 /* Authenticated users */
 Route::middleware('auth')->group(function() {
-   // Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/', function () {
         return view('index');
     });
+
+    Route::get('/profile', 'UserController@show');
+    Route::post('/profile', 'UserController@updatePicture');
+
     Route::get('/profile/{id}', 'UserController@show');
 
     Route::get('/aboutus', function () {
@@ -32,12 +37,11 @@ Route::middleware('auth')->group(function() {
         return view('contact');
     });
 
+    Route::post('/contact', 'MessageController@store');
+
     Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
 
     Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
-
-    Route::post('/contact', 'MessageController@store');
-
 });
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */

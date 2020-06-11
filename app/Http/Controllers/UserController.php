@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use \Auth;
 use App\User;
 use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -65,9 +66,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
+        $user = Auth::User();
         return view('profile', ['user' => $user]);
     }
 
@@ -112,6 +113,20 @@ class UserController extends Controller
         session()->flash('user-updated-message', $user->name.' was updated');
 
         return redirect('admin/users');
+    }
+
+    public function updatePicture(Request $request){
+        $user = Auth::User();
+        if($request->hasFile('avatar')){
+            $filename = $request->avatar->getClientOriginalName();
+            $request->avatar->storeAs('public/avatars', $filename);
+
+            $user->avatar = $filename;
+        }
+        $user->save();
+
+        return back()
+           ->with('success','You have successfully upload image.');
     }
 
     /**

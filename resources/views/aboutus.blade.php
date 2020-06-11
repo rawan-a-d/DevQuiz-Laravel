@@ -8,7 +8,7 @@
         <div class="team">
             <div class="team_member">
                 <div class="team_img">
-                    <img src="IDPic.jpeg" alt="Team_image">
+                    <img src="/storage/avatars/Bea.jpg" alt="Team_image">
                 </div>
                 <h3>Beatrice Forslund</h3>
                 <p class="smallinfo">Software Engineering Student at Fontys University of Applied Sciences</p>

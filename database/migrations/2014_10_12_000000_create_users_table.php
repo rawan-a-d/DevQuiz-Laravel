@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();
             $table->text('program')->nullable();
             $table->string('role')->default('subscriber');
+            $table->text('avatar')->default('default-pic.png');
+            $table->text('randomPictures')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

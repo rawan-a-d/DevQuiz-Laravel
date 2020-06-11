@@ -5,7 +5,7 @@ function printError(elemId, hintMsg) {
 
 /* Defining a function to validate form  */
 function validateForm() {
-	// Retrieving the values of form elements 
+	// Retrieving the values of form elements
 	var subject = document.getElementById("subject").value;
 	var message = document.getElementById("message").value;
 
@@ -16,7 +16,7 @@ function validateForm() {
 	// Validate email address
 	if(subject == "") {
 		printError("subjectErr", "Please enter the subject");
-	} 
+	}
 	else if(subject == "subject"){
 		printError("subjectErr", "Subject is not valid");
 	}
@@ -28,7 +28,7 @@ function validateForm() {
 	//Validate password
 	if(message == "") {
 		printError("messageErr", "Please enter your message");
-	} 
+	}
 	else {
 		printError("messageErr", "");
 		messageErr = false;
@@ -38,7 +38,7 @@ function validateForm() {
 	if(subjectErr || messageErr) {
 		console.log('errors');
 		return false;
-	} 
+	}
 	else {
 		console.log('no errors');
 		return true;

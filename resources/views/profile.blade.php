@@ -1,12 +1,9 @@
 @extends('layouts.master')
 
-{{--@section('sessions')--}}
-{{--    @parent--}}
-{{--    <?php--}}
-
-{{--//$userdata=user($_SESSION['userId']);--}}
-{{--    ?>--}}
-{{--@endsection--}}
+@section('sessions')
+    @parent
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 
@@ -16,8 +13,12 @@
 @section('content')
     <div class="wrapper">
         <div class="left">
-            <img src="img/IDPic.jpeg"
-                 alt="user" width="100">
+            <img src="/storage/avatars/{{$user->avatar}}"
+                 alt="user" width="100" id="img">
+            <form method = POST action = "/profile" enctype="multipart/form-data">
+                @csrf
+                <input type = "file" name= "avatar" id = "avatar">
+                <button type="submit">Upload an avatar</button></form>
             <h4>{{$user->name}}</h4>
 
         </div>
@@ -46,7 +47,41 @@
                         <p>{{$user->program}}.</p>
                     </div>
                 </div>
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <form method = POST action = "/profile" enctype="multipart/form-data">
+                    @csrf
+                    <input type = "file" name= "avatar" id = "avatar">
+                    <button type="submit" >Upload</button>
+                    <button type="submit" value="Delete">Delete</button>
+                </form>
             </div>
         </div>
     </div>
+
 @endsection
+<script>
+
+    $(document).ready(function(){
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#img').attr('src', e.target.result);
+                }
+            }
+        }
+
+        $("#avatar").change(function() {
+            readURL(this);
+        });
+    });
+
+</script>
