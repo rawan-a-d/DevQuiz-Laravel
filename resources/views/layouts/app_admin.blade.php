@@ -25,7 +25,7 @@
                         </button>
                         <!-- Link to profile and logout -->
                         <div class="dropdown-content">
-                            <a href="">Profile</a>
+                            <a href="{{route('profile.show', Auth::user()->id)}}">Profile</a>
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
                                 <button id="logout">Logout</button>
@@ -33,7 +33,7 @@
                         </div>
                     </li>
                     <!-- Link to home page -->
-                    <li class="topnav_item" id="home"><a href="{{asset('index')}}">HOME SITE</a></li>
+                    <li class="topnav_item" id="home"><a href="{{route('index')}}">HOME SITE</a></li>
                 </ul>
             </nav>
             <!-- Side navbar -->

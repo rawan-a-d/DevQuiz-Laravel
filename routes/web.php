@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/', function () {
         return view('index');
-    });
-    Route::get('/profile/{id}', 'UserController@show');
+    })->name('index');
+    Route::get('/profile/{id}', 'UserController@show')->name('profile.show');
 
     Route::get('/aboutus', function () {
         return view('aboutus');
@@ -38,6 +38,11 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/contact', 'MessageController@store');
 
+    Route::put('/profile/{id}', 'UserController@updateProfile')->name('profile.update');
+
+    Route::get('/password/reset', 'UserController@resetPassword')->name('password.request');
+
+    Route::put('/password/reset', 'UserController@updatePassword')->name('password.update');
 });
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */

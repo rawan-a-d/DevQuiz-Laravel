@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -112,6 +113,62 @@ class UserController extends Controller
         session()->flash('user-updated-message', $user->name.' was updated');
 
         return redirect('admin/users');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request, $id)
+    {
+        //VALIDATE DATA
+        $inputs = request()->validate([
+            'name'=>'required|string|min:4|max:255',
+            'email'=>'required|string|email',
+        ]);
+
+        $inputs['university'] = $request->university;
+        $inputs['program'] = $request->program;
+        $inputs['birthday'] = $request->birthday;
+
+        $user = User::findOrFail($id);
+
+        $user->update($inputs);
+
+        session()->flash('profile-updated-message', 'Your profile info was updated successfully!');
+
+        return back();
+    }
+
+    public function resetPassword()
+    {
+        return view('auth.passwords.reset');
+    }
+
+
+    public function updatePassword(Request $request)
+    {
+        $curr_password = $request->current_password;
+
+        if (!Hash::check($curr_password, auth()->user()->password)) {
+            return back()->withErrors(['current_password' => 'Incorrect password']);
+        }
+
+        $input = request()->validate([
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string',
+        ]);
+
+        $user = auth()->user();
+        $user->password = Hash::make($input['password']);
+        $user->save();
+
+        session()->flash('suceess_message', 'Your password was reset successfully!');
+
+        return redirect('/profile/'.auth()->user()->id);
     }
 
     /**
