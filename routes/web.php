@@ -31,10 +31,20 @@ Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@nex
 
 Route::post('/contact', 'MessageController@store');
 
-Route::resource('/admin/messages', 'MessageController');
+Auth::routes();
 
-Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
-Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
-Route::resource('/admin/users', 'UserController');
+/* Authenticated users */
+Route::middleware('auth')->group(function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-Route::resource('/admin/quizzes', 'QuestionController');
+/* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
+Route::group(['middleware'=>'admin'], function(){
+    Route::resource('/admin/users', 'UserController');
+    Route::put('admin/users/{user}/admin', 'UserController@toAdmin');
+    Route::put('admin/users/{user}/subscriber', 'UserController@toSubscriber');
+
+    Route::resource('/admin/messages', 'MessageController')->middleware('auth');
+
+    Route::resource('/admin/quizzes', 'QuestionController');
+});

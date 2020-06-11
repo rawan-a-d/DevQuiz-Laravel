@@ -13,7 +13,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::all();
+        $messages = Message::paginate(10);
 
         return view('admin.messages.messages', compact('messages'));
     }
@@ -89,6 +89,8 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
 
         $message->delete();
+
+        session()->flash('message', 'Message was deleted');
 
         return redirect('admin/messages');
     }

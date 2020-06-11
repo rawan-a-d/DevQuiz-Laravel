@@ -1,9 +1,44 @@
 @extends('layouts.app_admin')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/users.css') }}" />
+@section('title')
+    Users
+@endsection
+
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/admin.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/users.css') }}" />
+@endsection
 
 
 @section('content')
+
+    @if(session('message'))
+        <div class="error-msg">
+            <i class="fa fa-times-circle"></i>
+            {{session('message')}}
+        </div>
+    @elseif(session('question-created-message'))
+        <div class="success-msg">
+            <i class="fa fa-check"></i>
+            {{session('question-created-message')}}
+        </div>
+    @elseif(session('question-updated-message'))
+        <div class="success-msg">
+            <i class="fa fa-check"></i>
+            {{session('question-updated-message')}}
+        </div>
+    @elseif(session('user-role-admin-message'))
+        <div class="info-msg">
+            <i class="fa fa-info-circle"></i>
+            {{session('user-role-admin-message')}}
+        </div>
+    @elseif(session('user-role-sub-message'))
+        <div class="info-msg">
+            <i class="fa fa-info-circle"></i>
+            {{session('user-role-sub-message')}}
+        </div>
+    @endif
+
     <!-- Table -->
     <table class="table table-bordered table-hover">
         <thead>
@@ -46,8 +81,6 @@
                     <input type="submit" value="Subscriber">
                 </form>
             </td>
-    {{--        <td><a href='users.php?change_to_admin=<?php echo $id ?>'>Admin</a></td>--}}
-    {{--        <td><a href='users.php?change_to_sub=<?php echo $id ?>'>Subscriber</a></td>--}}
             <td><a href="{{route('users.edit', $user->id)}}">Edit</a></td>
             <td>
                 <form action="/admin/users/{{$user->id}}" method="post">
@@ -56,12 +89,12 @@
                     <input type="submit" value="Delete">
                 </form>
             </td>
-    {{--        <td><a href="{{route('users.destroy', $user->id)}}">Delete</a></td>--}}
-
         </tr>
         @endforeach
 
-
         </tbody>
     </table>
-@stop
+    {{$users->links()}}
+
+@endsection
+
