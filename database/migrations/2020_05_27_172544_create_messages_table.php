@@ -18,7 +18,7 @@ class CreateMessagesTable extends Migration
             $table->enum('subject', ['Quiz', 'Score', 'Other']);
             $table->text('message');
             $table->integer('user_id')->unsigned();
-            $table->text('image')->nullable();
+            $table->text('picture')->nullable();
             $table->timestamps();
 
         });

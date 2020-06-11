@@ -28,7 +28,7 @@
 @section('content')
     <!-- Main -->
     <main id="main">
-        <form method="POST" action="" id="contact_form">
+        <form method="POST" action="" id="contact_form" enctype="multipart/form-data">
             @csrf
             <label for="subject">Subject</label>
             <select id="subject" name="subject">
@@ -46,6 +46,11 @@
             <!-- Display errors -->
             <div class="error" id="messageErr">
             </div>
+            <label for="message">You can upload at most 4 files/pictures when contacting us!</label>
+            <input type = "file" name= "picture" id = "picture">
+            <input type = "file" name= "picture1" id = "picture1">
+            <input type = "file" name= "picture2" id = "picture2">
+            <input type = "file" name= "picture3" id = "picture3">
             <!-- Submit button -->
             <button type="submit" name="submit" id="five" class="button">
                 Send

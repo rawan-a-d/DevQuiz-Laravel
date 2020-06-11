@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/profile/{id}', 'UserController@show');
-Route::post('/profile/{id}', 'UserController@updatePicture');
+
+Route::get('/profile', 'UserController@show');
+Route::post('/profile', 'UserController@updatePicture');
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
@@ -35,7 +33,7 @@ Auth::routes();
 
 /* Authenticated users */
 Route::middleware('auth')->group(function() {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 });
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
@@ -48,3 +46,7 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::resource('/admin/quizzes', 'QuestionController');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

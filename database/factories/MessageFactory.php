@@ -11,6 +11,7 @@ $factory->define(Message::class, function (Faker $faker) {
         'subject' =>  $faker->randomElement(['Quiz', 'Score', 'Other']),
         'message' => $faker->text,
         'user_id' => rand(1,20),
+        'picture' => 'none',
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime
     ];

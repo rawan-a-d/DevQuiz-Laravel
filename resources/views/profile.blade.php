@@ -15,10 +15,10 @@
         <div class="left">
             <img src="/storage/avatars/{{$user->avatar}}"
                  alt="user" width="100" id="img">
-            <form method = POST action = "/profile/{{$user->id}}" enctype="multipart/form-data">
+            <form method = POST action = "/profile" enctype="multipart/form-data">
                 @csrf
                 <input type = "file" name= "avatar" id = "avatar">
-                <button type="submit">Upload</button></form>
+                <button type="submit">Upload an avatar</button></form>
             <h4>{{$user->name}}</h4>
 
         </div>
@@ -47,9 +47,24 @@
                         <p>{{$user->program}}.</p>
                     </div>
                 </div>
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <img src="/storage/avatars/{{$user->avatar}}"
+                     alt="user" width="130" id="img">
+                <form method = POST action = "/profile" enctype="multipart/form-data">
+                    @csrf
+                    <input type = "file" name= "avatar" id = "avatar">
+                    <button type="submit" >Upload</button>
+                    <button type="submit" value="Delete">Delete</button>
+                </form>
             </div>
         </div>
     </div>
+
 @endsection
 <script>
 
