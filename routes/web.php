@@ -23,7 +23,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/profile', 'UserController@show');
-    Route::post('/profile', 'UserController@updatePicture');
 
     Route::get('/profile/{id}', 'UserController@show')->name('profile.show');
 
@@ -33,12 +32,16 @@ Route::middleware('auth')->group(function() {
     Route::get('/contact', function () {
         return view('contact');
     });
-
     Route::post('/contact', 'MessageController@store');
 
-    Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
+    Route::get('/customize', 'PictureController@showCustomize');
+    Route::post('/customize', 'PictureController@updatePicture');
+    Route::get('/grey', 'PictureController@greyPicture');
+    Route::get('/pixalate', 'PictureController@pixalatePicture');
 
+    Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
     Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
+
 
     Route::put('/profile/{id}', 'UserController@updateProfile')->name('profile.update');
 

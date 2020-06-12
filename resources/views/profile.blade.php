@@ -24,7 +24,8 @@
             {{session('profile-updated-message')}}
         </div>
     @endif
-
+        <img src="/storage/avatars/{{$user->avatar}}"
+         alt="user" width="130" id="img">
     <!-- Enctype send multiple/different form data(image and text) -->
     <form action="{{route('profile.update', $user->id)}}" method="post" enctype="multipart/form-data" id="udpate_info_form">
     {{ csrf_field() }}
@@ -98,41 +99,9 @@
 {{--                        <p>{{$user->program}}.</p>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-                <img src="/storage/avatars/{{$user->avatar}}"
-                     alt="user" width="130" id="img">
-                <img src="/storage/avatars/{{$user->avatar}}"
-                     alt="user" width="130" id="img">
-                <img src="/storage/avatars/{{$user->avatar}}"
-                     alt="user" width="130" id="img">
-                <img src="/storage/avatars/{{$user->avatar}}"
-                     alt="user" width="130" id="img">
-                <form method = POST action = "/profile" enctype="multipart/form-data">
-                    @csrf
-                    <input type = "file" name= "avatar" id = "avatar">
-                    <button type="submit" >Upload</button>
-                    <button type="submit" value="Delete">Delete</button>
-                </form>
+
             </div>
 {{--        </div>--}}
 {{--    </div>--}}
 
 @endsection
-<script>
-
-    $(document).ready(function(){
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#img').attr('src', e.target.result);
-                }
-            }
-        }
-
-        $("#avatar").change(function() {
-            readURL(this);
-        });
-    });
-
-</script>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
+
 class UserController extends Controller
 {
     /**
@@ -116,19 +117,6 @@ class UserController extends Controller
         return redirect('admin/users');
     }
 
-    public function updatePicture(Request $request){
-        $user = Auth::User();
-        if($request->hasFile('avatar')){
-            $filename = $request->avatar->getClientOriginalName();
-            $request->avatar->storeAs('public/avatars', $filename);
-
-            $user->avatar = $filename;
-        }
-        $user->save();
-
-        return back()
-           ->with('success','You have successfully upload image.');
-    }
 
     /**
      * Update the specified resource in storage.

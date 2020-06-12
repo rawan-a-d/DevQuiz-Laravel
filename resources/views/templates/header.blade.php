@@ -16,6 +16,7 @@
         @endif
         <li><a href="/aboutus">About us</a></li>
         <li><a href="/contact">Contact</a></li>
+        <li><a href="/customize">Modify picture</a></li>
         <li id="li_logout">
             <form action="{{route('logout')}}" method="post">
                 @csrf
