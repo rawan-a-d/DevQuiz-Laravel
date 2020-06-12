@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    font: 400 0.813em Arial;
+    background: lavender;
+}
+
 /* Header */
 #page-header {
     font-size: 2em;
