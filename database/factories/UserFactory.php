@@ -27,6 +27,7 @@ $factory->define(User::class, function (Faker $faker) {
         'program' => 'ICT & Software',
         'role' => 'subscriber',
         'remember_token' => Str::random(10),
+        'avatar' => 'default-pic.png',
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime
     ];

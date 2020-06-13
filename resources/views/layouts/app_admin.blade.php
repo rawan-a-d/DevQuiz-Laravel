@@ -33,7 +33,7 @@
                         </div>
                     </li>
                     <!-- Link to home page -->
-                    <li class="topnav_item" id="home"><a href="{{route('index')}}">HOME SITE</a></li>
+                    <li class="topnav_item" id="home"><a href="{{route('home')}}">HOME SITE</a></li>
                 </ul>
             </nav>
             <!-- Side navbar -->

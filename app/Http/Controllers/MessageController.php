@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use \Auth;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -36,10 +36,45 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = new Message($request->all());
+        $user_id = Auth::id();
+        $file = '';
+        if($request->hasFile('picture')){
 
+           $filename = $request->picture->getClientOriginalName(); // save the original fileName instead of gibberish
+            $request->picture->storeAs('public/pictures', $filename); // save on storage
+            $file .= $filename;
 
-        $message->save();
+        }
+        if($request->hasFile('picture1')){
+
+            $filename = $request->picture1->getClientOriginalName();
+            $request->picture1->storeAs('public/pictures', $filename);
+            $file .= '/'; // seperator between files in the database
+            $file .= $filename;
+
+        }
+        if($request->hasFile('picture2')){
+
+            $filename = $request->picture2->getClientOriginalName();
+            $request->picture2->storeAs('public/pictures', $filename);
+            $file .= '/';
+            $file .= $filename;
+
+        }
+        if($request->hasFile('picture3')){
+
+            $filename = $request->picture3->getClientOriginalName();
+            $request->picture3->storeAs('public/pictures', $filename);
+            $file .= '/';
+            $file .= $filename;
+
+        }
+            $subject = $request->subject;
+            $msgs = $request->message;
+
+        // Create a message in database
+        $message = Message::create(['subject' => $subject, 'message' => $msgs, 'user_id'=>$user_id, 'picture' => $file]);
+
 
         return redirect('contact');
     }

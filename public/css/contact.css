@@ -93,7 +93,7 @@ html.modal-active, body.modal-active {
  #modal-container.five.out .modal-background .modal {
 	 animation: roadRunnerOut 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
- 
+
  #modal-container .modal-background {
 	 display: table-cell;
 	 background: rgba(0, 0, 0, .8);
@@ -278,7 +278,7 @@ html.modal-active, body.modal-active {
 	#main > form > input, #main > form > textarea, #main > form > #subject, #main > form > label {
 		margin: 2% 5% 2% 5%;
 	}
-} 
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
@@ -290,4 +290,17 @@ html.modal-active, body.modal-active {
 	#main > form > input, #main > form > textarea, #main > form > #subject, #main > form > label {
 		margin: 2% 5% 1.5% 5%;
 	}
+}
+/* Upload button */
+input {
+    display: inline-block;
+    cursor: pointer;
+    padding: 2.5% 3%;
+    font-size: 1.1em;
+    border-radius: 3px;
+    border-style: none;
+    background-color: lightcyan;
+    color: black;
+    margin: 2% 5%;
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

@@ -1,26 +1,4 @@
 @extends('layouts.master')
-@section('sessions')
-    @parent
-    <?php
-
-//
-//$subject = $message = "";
-//
-///* If post request */
-//if($_SERVER["REQUEST_METHOD"] == "POST") {
-//    $subject = htmlspecialchars(trim($_POST["subject"]));
-//    $message = htmlspecialchars(trim($_POST["message"]));
-//
-//    // Get user id
-//    $userId = $_SESSION['userId'];
-//
-//    // Create message controller object
-//    $controller = new MessageController();
-//    // Send message
-//    $controller->addMessage($userId, $subject, $message);
-//}
-    ?>
-@endsection
 
 @section('title', 'Contact us')
 @section('css', 'contact')
@@ -28,7 +6,7 @@
 @section('content')
     <!-- Main -->
     <main id="main">
-        <form method="POST" action="" id="contact_form">
+        <form method="POST" action="" id="contact_form" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
             <label for="subject">Subject</label>
             <select id="subject" name="subject">
@@ -46,20 +24,16 @@
             <!-- Display errors -->
             <div class="error" id="messageErr">
             </div>
+            <label for="message">You can upload at most 4 files/pictures when contacting us!</label>
+            <input type = "file" name= "picture" id = "picture">
+            <input type = "file" name= "picture1" id = "picture1">
+            <input type = "file" name= "picture2" id = "picture2">
+            <input type = "file" name= "picture3" id = "picture3">
             <!-- Submit button -->
             <button type="submit" name="submit" id="five" class="button">
                 Send
             </button>
         </form>
     </main>
-    <!-- Succes message -->
-    <div id="modal-container">
-        <div class="modal-background">
-            <div class="modal">
-                <h2>Thanks for your message</h2>
-                <p>We'll get back to you as soon as possible!</p>
-            </div>
-        </div>
-    </div>
 @endsection
 <script type="text/javascript" src="js/contact.js"></script>

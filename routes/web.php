@@ -14,15 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Auth::routes();
+
 
 /* Authenticated users */
 Route::middleware('auth')->group(function() {
-   // Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+    Route::get('/profile', 'UserController@show');
+
     Route::get('/profile/{id}', 'UserController@show')->name('profile.show');
 
     Route::get('/aboutus', function () {
@@ -31,12 +32,16 @@ Route::middleware('auth')->group(function() {
     Route::get('/contact', function () {
         return view('contact');
     });
+    Route::post('/contact', 'MessageController@store');
+
+    Route::get('/customize', 'PictureController@showCustomize');
+    Route::post('/customize', 'PictureController@updatePicture');
+    Route::get('/grey', 'PictureController@greyPicture');
+    Route::get('/pixalate', 'PictureController@pixalatePicture');
 
     Route::get('/quizpage/{subject}/{level}/', 'QuestionController@first');
-
     Route::get('/quizpage/{subject}/{level}/{id}/{correct}', 'QuestionController@next');
 
-    Route::post('/contact', 'MessageController@store');
 
     Route::put('/profile/{id}', 'UserController@updateProfile')->name('profile.update');
 
@@ -44,6 +49,7 @@ Route::middleware('auth')->group(function() {
 
     Route::put('/password/reset', 'UserController@updatePassword')->name('password.update');
 });
+
 
 /* ALLOW ONLY ADMIN TO ACCESS THOSE ROUTES */
 Route::group(['middleware'=>'admin'], function(){

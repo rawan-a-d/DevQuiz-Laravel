@@ -15,7 +15,7 @@ $factory->define(Question::class, function (Faker $faker) {
         'ans_c' => $faker->title,
         'ans_d' => $faker->title,
         'answer' => $faker->title,
-        'level' => rand(1,5),
+        'level' => rand(1,2),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime
 
