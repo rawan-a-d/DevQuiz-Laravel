@@ -4,4 +4,4 @@ function changetype()
 }
 
 var select = document.getElementById("qtype")
-select.addEventListener("change", changetype;
+select.addEventListener("change", changetype);

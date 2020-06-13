@@ -28,13 +28,13 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/aboutus', function () {
         return view('aboutus');
-    });
+    })->name('aboutus.show');
     Route::get('/contact', function () {
         return view('contact');
-    });
+    })->name('contact.show');
     Route::post('/contact', 'MessageController@store');
 
-    Route::get('/customize', 'PictureController@showCustomize');
+    Route::get('/customize', 'PictureController@showCustomize')->name('customize.show');
     Route::post('/customize', 'PictureController@updatePicture');
     Route::get('/grey', 'PictureController@greyPicture');
     Route::get('/pixalate', 'PictureController@pixalatePicture');

@@ -8,15 +8,15 @@
 <!-- Navbar -->
 <nav>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/profile/{{Auth::user()->id}}">Profile</a></li>
+        <li class="{{ active('home') }}"><a href="/">Home</a></li>
+        <li class="{{ active('profile.show') }}"><a href="/profile/{{Auth::user()->id}}">Profile</a></li>
         <!-- If user is admin -->
         @if(Auth::user()->isAdmin())
             <li><a href="{{route('users.index')}}">Admin</a></li>
         @endif
-        <li><a href="/aboutus">About us</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/customize">Modify picture</a></li>
+        <li class="{{ active('aboutus.show') }}"><a href="/aboutus">About us</a></li>
+        <li class="{{ active('contact.show') }}"><a href="/contact">Contact</a></li>
+        <li class="{{ active('customize.show') }}"><a href="/customize">Modify picture</a></li>
         <li id="li_logout">
             <form action="{{route('logout')}}" method="post">
                 @csrf
