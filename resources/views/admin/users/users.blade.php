@@ -17,15 +17,15 @@
             <i class="fa fa-times-circle"></i>
             {{session('message')}}
         </div>
-    @elseif(session('question-created-message'))
+    @elseif(session('user-created-message'))
         <div class="success-msg">
             <i class="fa fa-check"></i>
-            {{session('question-created-message')}}
+            {{session('user-created-message')}}
         </div>
-    @elseif(session('question-updated-message'))
+    @elseif(session('user-updated-message'))
         <div class="success-msg">
             <i class="fa fa-check"></i>
-            {{session('question-updated-message')}}
+            {{session('user-updated-message')}}
         </div>
     @elseif(session('user-role-admin-message'))
         <div class="info-msg">

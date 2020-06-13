@@ -41,7 +41,7 @@
                 <td>{{$message->user->email}}</td>
                 <td>{{$message->subject}}</td>
                 <td>{{$message->message}}</td>
-                <td>{{$message->date}}</td>
+                <td>{{$message->created_at->format('d M Y')}}</td>
 
                 <td>
                     <form action="{{route('messages.destroy', $message->id)}}" method="post">
