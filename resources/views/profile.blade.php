@@ -4,15 +4,6 @@
 @section('css', 'profile')
 
 @section('content')
-{{--    <div class="wrapper">--}}
-{{--        <div class="left">--}}
-{{--            <img src="/storage/avatars/{{$user->avatar}}"--}}
-{{--                 alt="user" width="100" id="img">--}}
-{{--            <form method = POST action = "/profile" enctype="multipart/form-data">--}}
-{{--                @csrf--}}
-{{--                <input type = "file" name= "avatar" id = "avatar">--}}
-{{--                <button type="submit">Upload an avatar</button></form>--}}
-{{--            <h4>{{$user->name}}</h4>--}}
     @if(session('suceess_message'))
         <div class="success-msg">
             <i class="fa fa-check"></i>
@@ -87,21 +78,4 @@
             <button class="btn"><a href="{{route('password.request')}}">Reset password?</a></button>
         </div>
     </form>
-
-            <div class="bottom">
-{{--                <div class="bottom_data">--}}
-{{--                    <div class="data">--}}
-{{--                        <h4>University</h4>--}}
-{{--                        <p>{{$user->university}}</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="data">--}}
-{{--                        <h4>Progamming languages</h4>--}}
-{{--                        <p>{{$user->program}}.</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-            </div>
-{{--        </div>--}}
-{{--    </div>--}}
-
 @endsection
