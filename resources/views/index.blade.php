@@ -1,17 +1,4 @@
 @extends('layouts.master')
-
-
-@section('sessions')
-@parent
-<?php
-////Reset q number
-//$_SESSION['currentq']=-1;
-//$_SESSION['correntans']=0;
-?>
-@endsection
-
-
-
 @section('title', 'Dev Quiz')
 @section('css', 'home')
 

@@ -1,17 +1,4 @@
 
-@section('sessions')
-    <?php
-
-///* Check session */
-//include("$configPath/session.php");
-//
-///* Session expiry */
-//include("$configPath/session_expiry.php");
-?>
-@endsection
-
-
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
